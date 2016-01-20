@@ -75,6 +75,7 @@
               <li id='dashboard-nav'><a href="{% url 'dashboard:main' %}">{% trans "Dashboard" %}</a></li>
               <li id='incidents-nav'><a href="{% url 'incidents:index' %}">{% trans "Incidents"%}</a></li>
               <li id='events-nav'><a href="{% url 'events:index' %}">{% trans "Events" %}</a></li>
+              {% block extra_buttons %}{% endblock %}
               <li id='incidents-nav' class='dropdown'>
                 <a class='dropdown-toggle' data-toggle='dropdown' href="#">{% trans "Stats" %}</a>
                 <ul class='dropdown-menu'>
