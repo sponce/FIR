@@ -1,0 +1,37 @@
+{% load i18n %}
+{% if email_list %}
+    <div class='email_table' data-order-param='{{ order_param }}' data-asc='{{ asc }}'>
+        <table class='table table-hover table-condensed'>
+            <thead>
+            {% trans "Date" as t_date %}
+            {% trans "Sender" as t_sender %}
+            {% trans "To" as t_to %}
+            {% trans "Cc" as t_cc %}
+            {% trans "Bcc" as t_bcc %}
+            {% trans "Body" as t_subject %}
+            {% trans "Subject" as t_subject %}
+            {% trans "Case" as t_case %}
+                <tr>
+                    {% include 'events/column.html' with name=t_date field='date' %}
+                    {% include 'events/column.html' with name=t_sender field='sender' %}
+                    {% include 'events/column.html' with name=t_subject field='subject' %}
+                    {% include 'events/column.html' with name=t_body field='body' %}
+                    {% include 'events/column.html' with name=t_case field='case' %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for email in email_list %}
+                    <tr class='{{ incident.status }}'>
+                        <td class='incident_date_column'>{{ email.date|date:'Y-m-d' }}</td>
+                        <td>{{ email.sender }}</td>
+                        <td>{{ email.subject }}</td>
+                        <td>{{ email.body }}</td>
+                        <td><a href="{% url 'incidents:details' email.case.id %}">{{ email.case }}</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% else %}
+    <div class='nothing_to_show'>{% trans "No mails to show." %}</div>
+{% endif %}

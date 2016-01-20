@@ -22,6 +22,9 @@ urlpatterns = patterns('',
     # alerting
     url(r'^alerting/', include('fir_alerting.urls', namespace='alerting')),
 
+    # siem
+    url(r'^siem/', include('fir_siem.urls', namespace='siem')),
+
     # todos
     url(r'^todos/', include('fir_todos.urls', namespace='todos')),
 

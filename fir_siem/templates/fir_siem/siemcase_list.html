@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load fir_plugins %}
+{% load i18n %}
+{% load staticfiles %}
+
+{% block extra_buttons %}
+<li id='events-nav'><a href="{% url 'siem:cases_list' %}">{% trans "SIEMCases" %}</a></li>
+{% endblock %}
+
+{% block content %}
+
+{% if siemcase_list %}
+<ul>
+  {% for case in siemcase_list %}
+  <li>Case {{ case.id }}</li>
+    {% include 'events/table.html' with incident_list=case.related_incidents.all %}
+    {% include 'fir_siem/mails.html' with email_list=case.email_set.all %}
+  {% endfor %}
+</ul>
+{% else %}
+	<div class='nothing_to_show'>{% trans "No cases to show." %}</div>
+{% endif %}
+
+{% endblock %}
